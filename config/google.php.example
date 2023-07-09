@@ -1,0 +1,40 @@
+<?php
+  /**
+   * Google Calendar API details, including
+   *  - path to Google API autoload.php
+   *  - path to Google API credentials.json
+   *  - source calendar calendar ID (must be public or, if private, shared with the service account)
+   *  - Google App Name
+   *  - Google App API Key
+   */
+  require_once('/path/to/vendor/autoload.php');
+  putenv('GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/google/service/api/key/project-aabbcc-ddeeff.json');
+  $calendarId = 'en.usa#holiday@group.v.calendar.google.com';
+  $googleAppName = 'Your Google App Name Here';
+  $googleAppKey = '00112233445566778899AABBCCDDEEFF';
+  /**
+   * Parameters for querying future/next event. Under most circumstances these need not be changed.
+   */
+  $futureParams = array(
+    'maxResults' => 2,
+    'orderBy' => 'startTime',
+    'singleEvents' => true,
+    'timeMin' => date('c'),
+    'timeZone' => 'America/Chicago',
+  );
+  /**
+   * Parameters for querying past events. Important to note:
+   *  - `maxResults` should be set sufficiently high enough to capture all expected
+   *      events on the source calendar between `timeMin` and `timeMax`
+   *  - `timeMin` in this example is set to three months from today
+   *  - `timeMax` is set to today
+   */
+  $pastParams = array(
+    'maxResults' => 100,
+    'orderBy' => 'startTime',
+    'singleEvents' => true,
+    'timeMin' => date('c', strtotime('-3 months')),
+    'timeMax' => date('c'),
+    'timeZone' => 'America/Chicago',
+  );
+?>

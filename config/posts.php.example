@@ -1,0 +1,17 @@
+<?php
+  /**
+   * Settings to configure the display of the bot's posts
+   */
+  // Include event names/summaries
+  $includeEventSummary = true;
+  // Include last/next event dates (requires $includeEventSummary = true)
+  $includeLastEventDate = false;
+  $includeNextEventDate = false;
+  // Progress bar character definitions
+  $progressCharacter = "▓";
+  $remainingCharacter = "░";
+  // Character width of progress bar
+  $totalBars = 18;
+  // Debug API posting by printing output of full JSON response. Behaves independent of $debug_bot.
+  $debug_post = false;
+?>

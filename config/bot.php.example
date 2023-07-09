@@ -1,0 +1,48 @@
+<?php
+  /**
+   * Authorizations and ATProto settings
+   */
+  // ATProto Host
+  $atprotoHost = 'http://localhost:2583'; // Production Bluesky is at 'https://bsky.social';
+  // Bot Account Credentials (use an App Password) 
+  $accountId = 'usernamegoeshere';
+  $accountCred = 'apppasswordgoeshere';
+
+  /**
+   * General bot settings controlling its behavior.
+   */
+  // Bot timezome setting and current date (Y-m-d). This is best set to the same as the source Google calendar.
+  date_default_timezone_set('America/Chicago');
+  $today = date('Y-m-d');
+  $timeAtRun = date('Y-m-d H:i:s');
+  /**
+   * Respect event duration. Don't generate a post until events are complete (assumes $allDayEventEndTime for all-day events).
+   *  - 'false' = progress will begin immediately after event's first announcement/start date/time.
+   *  - 'true' (bot default) = posts will generate begining at midnight _after_ event's start date.
+   */
+  $respectEventDuration = true;
+  /**
+   * Set a bot standard "end time" for all-day events. Things to note:
+   *  - Flexibly sets the "end" of all-day events to whatever desired (end of "work day," etc., versus midnight);
+   *  - When `$respectEventDuration = false` the "end time" for all-day events will be the "start time" for the "last" event (this setting doesn't apply).
+   * String format should be `hh:mm:ss` Default: 23:59:59 (midnight)
+   */
+  $allDayEventEndTime = '23:59:59';
+  /**
+   * Expected event cadence (default: 'day').
+   *  Set to 'hour' if expected interval between events is less than 24 hours.
+   *  This changes the math/diff in event calculations ('day' == greater precision).
+   *  Currently unused; provided for future iterations.
+   */
+  $expectedEventCadence = 'day';
+  /**
+   * Debug all the bot's calculations and output/response. Behaves independent of $debug_post, with nuance:
+   *  - if $debug_post is set = true, will include the full JSON response from the ATProto API post.
+   *  - if $debug_post is set = false, will only include the response ("Good/Bad Request") from the ATProto API post.
+   * Debug format affords a raw PHP print_r of the debug information array (can be easier to examine in realtime).
+   *  - default ($debug_format): 'json'
+   *  - not specified/other: print_r
+   */
+  $debug_bot = true;
+  $debug_format = 'json';
+?>
